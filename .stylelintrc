@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "rules": {
+    "indentation": [2, { "severity": "warning" }],
+    "color-hex-length": ["long", {"severity": "warning"}]
+  }
+}
