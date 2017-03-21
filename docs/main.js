@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", function() {
         showDialogButton = document.querySelector('#setting'),
         notification = document.querySelector('.mdl-js-snackbar'),
         title = document.querySelector('#title'),
-        description = document.querySelector('#description');
+        description = document.querySelector('#description'),
+        urlParams = new URLSearchParams(window.location.search);
+
+  title.value = urlParams.has('title') ? urlParams.get('title') : '';
+  description.value = urlParams.has('description') ? urlParams.get('description') : '';
 
   showDialogButton.addEventListener('click', () => {
     dialog.showModal();
