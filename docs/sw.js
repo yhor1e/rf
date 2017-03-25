@@ -5,9 +5,9 @@ self.addEventListener('install', function(e) {
     caches.open(cacheName).then(function(cache) {
       console.info('[ServiceWorker] Caching app shell');
       return cache.addAll([
-        '/',
-        '/index.html',
-        '/main.js',
+        './',
+        './index.html',
+        './main.js',
       ]);
     })
   );
