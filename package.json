@@ -1,6 +1,6 @@
 {
   "name": "rf",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -11,5 +11,9 @@
   },
   "keywords": [],
   "author": "yhor1e",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "material-design-icons": "^3.0.1",
+    "material-design-lite": "^1.3.0"
+  }
 }

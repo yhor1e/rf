@@ -5,7 +5,7 @@
   "background_color": "#607d8b",
   "display": "standalone",
   "orientation": "portrait",
-  "Scope": "/yhor1e.github.io/rf/",
+  "Scope": "/yhor1e.github.io/",
   "start_url": "./index.html",
   "icons": [
     {

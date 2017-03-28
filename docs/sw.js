@@ -1,4 +1,4 @@
-const cacheName = 'rf-0-0-1';
+const cacheName = 'rf-0-0-3';
 
 self.addEventListener('install', function(e) {
   e.waitUntil(
@@ -8,6 +8,10 @@ self.addEventListener('install', function(e) {
         './',
         './index.html',
         './main.js',
+        './material-icons.css',
+        './material.blue_grey-blue.min.css',
+        './material.min.js',
+        './MaterialIcons-Regular.woff2'
       ]);
     })
   );
