@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.querySelector('#create-issue').addEventListener('click', ()=>{
+    document.querySelector('#create-issue').disabled = true;
     fetch('https://api.github.com/repos/' + localStorage.getItem('user-name') + '/' + localStorage.getItem('repository') + '/issues', {
       headers: {
         'Accept': 'application/json',
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         body: description.value
       })
     }).then((response) => {
+      document.querySelector('#create-issue').disabled = false;
       displayToast(response.statusText);
 
       if('Created' === response.statusText){
@@ -48,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
     }).catch((error) => {
+      document.querySelector('#create-issue').disabled = false;
       displayToast(error.message);
     });
   });
