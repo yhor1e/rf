@@ -21,7 +21,7 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">rf v0.0.4</span>
+          <span class="mdl-layout-title">rf v0.0.5</span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
             <button id="setting" class="mdl-button mdl-js-button mdl-button--icon">
@@ -45,7 +45,7 @@
 
           <p>
             Input target GitHub repository and personal access token.
-            These will stored in localstorage.
+            These will be stored in localstorage.
           </p>
         </div>
         <div class="mdl-dialog__actions">
@@ -82,7 +82,7 @@
         <button type="button" class="mdl-snackbar__action"></button>
       </div>
     </div>
-    <script src="./main.js"></script>
+    <script type="module" src="./main.js"></script>
     <script>
       if('serviceWorker' in navigator) {
         navigator.serviceWorker

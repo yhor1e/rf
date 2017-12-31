@@ -1,3 +1,5 @@
+import {displayToast} from './toast.js';
+
 document.addEventListener("DOMContentLoaded", function() {
 
   const dialog = document.querySelector('dialog'),
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.querySelector('#create-issue').addEventListener('click', ()=>{
+    document.querySelector('#create-issue').disabled = true;
     fetch('https://api.github.com/repos/' + localStorage.getItem('user-name') + '/' + localStorage.getItem('repository') + '/issues', {
       headers: {
         'Accept': 'application/json',
@@ -40,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
         body: description.value
       })
     }).then((response) => {
-      displayToast(response.statusText);
+      document.querySelector('#create-issue').disabled = false;
+      displayToast(notification, response.statusText);
 
       if('Created' === response.statusText){
         title.value = '';
@@ -48,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
     }).catch((error) => {
-      displayToast(error.message);
+      document.querySelector('#create-issue').disabled = false;
+      displayToast(notification, error.message);
     });
   });
 
@@ -64,16 +69,9 @@ document.addEventListener("DOMContentLoaded", function() {
       return response.json();
     }).then((data) => {
       localStorage.setItem('user-name', data.login);
-      displayToast('Got user name "' + data.login + '" and stored localstorage');
+      displayToast(notification, 'Got user name "' + data.login + '" and stored localstorage');
     }).catch((error) => {
-      displayToast(error.message);
-    });
-  }
-
-  function displayToast (message) {
-    notification.MaterialSnackbar.showSnackbar({
-      message: message,
-      timeout: 3000
+      displayToast(notification, error.message);
     });
   }
 });
