@@ -1,13 +1,15 @@
 {
   "name": "rf",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy": "rm -rf docs/* && copyfiles -u 1 src/**/**/* src/**/* src/* docs",
+    "build": "npm run copy && workbox injectManifest workbox-config.js"
   },
   "keywords": [],
   "author": "yhor1e",
@@ -15,5 +17,9 @@
   "dependencies": {
     "material-design-icons": "^3.0.1",
     "material-design-lite": "^1.3.0"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.1.1",
+    "workbox-cli": "^4.3.1"
   }
 }
