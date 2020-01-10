@@ -1,37 +1,77 @@
-const cacheName = 'rf-0-0-6';
+//const cacheName = 'rf-0-0-6';
+//
+//self.addEventListener('install', function(e) {
+//  e.waitUntil(
+//    caches.open(cacheName).then(function(cache) {
+//      return cache.addAll([
+//        './',
+//        './index.html',
+//        './main.js',
+//        './material-icons.css',
+//        './material.blue_grey-blue.min.css',
+//        './material.min.js',
+//        './MaterialIcons-Regular.woff2'
+//      ]);
+//    })
+//  );
+//});
+//
+//self.addEventListener('activate', function(e) {
+//  e.waitUntil(
+//    caches.keys().then(function(keyList) {
+//      return Promise.all(keyList.map(function(key) {
+//        if (key !== cacheName) {
+//          return caches.delete(key);
+//        }
+//      }));
+//    })
+//  );
+//});
+//
+//self.addEventListener('fetch', function(e) {
+//  e.respondWith(
+//    caches.match(e.request).then(function(response) {
+//      return response || fetch(e.request);
+//    })
+//  );
+//});
 
-self.addEventListener('install', function(e) {
-  e.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      return cache.addAll([
-        './',
-        './index.html',
-        './main.js',
-        './material-icons.css',
-        './material.blue_grey-blue.min.css',
-        './material.min.js',
-        './MaterialIcons-Regular.woff2'
-      ]);
-    })
-  );
-});
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js');
 
-self.addEventListener('activate', function(e) {
-  e.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (key !== cacheName) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-});
+if (workbox) {
+  console.log(`Yay! Workbox is loaded`);
 
-self.addEventListener('fetch', function(e) {
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
-});
+  workbox.precaching.precacheAndRoute([
+  {
+    "url": "index.html",
+    "revision": "2fd8538751368c7d000c751242d7e405"
+  },
+  {
+    "url": "main.js",
+    "revision": "2b43d93ed8a71d8d4bd2d9980f82bebd"
+  },
+  {
+    "url": "material-icons.css",
+    "revision": "c5941eed2e20a509114128aab1e96edf"
+  },
+  {
+    "url": "material.blue_grey-blue.min.css",
+    "revision": "4e1b23f7c85e9bf4b4738c7353da13cb"
+  },
+  {
+    "url": "material.min.js",
+    "revision": "713af0c6ce93dbbce2f00bf0a98d0541"
+  },
+  {
+    "url": "MaterialIcons-Regular.woff2",
+    "revision": "570eb83859dc23dd0eec423a49e147fe"
+  },
+  {
+    "url": "toast.js",
+    "revision": "6276f3607b19efba8d706d70a232cc43"
+  }
+]);
+
+} else {
+  console.log(`Boo! Workbox didn't load`);
+}
