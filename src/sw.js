@@ -2,6 +2,20 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox
 if (workbox) {
   console.log(`Workbox is loaded`);
   workbox.precaching.precacheAndRoute([]);
+
+  const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
+    maxRetentionTime: 24 * 60,
+    callbacks: {
+      // TODO: add notification callback
+    }
+  });
+  workbox.routing.registerRoute(
+      /\.*/,
+    new workbox.strategies.NetworkOnly({
+      plugins: [bgSyncPlugin]
+    }),
+    'POST'
+  );
 } else {
   console.log(`Workbox didn't load`);
 }

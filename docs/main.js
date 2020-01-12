@@ -54,8 +54,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }).catch((error) => {
       displayToast(notification, error.message);
       document.querySelector('#create-issue').disabled = false;
-      localStorage.setItem('q-title', title.value);
-      localStorage.setItem('q-description', description.value);
       title.value = '';
       description.value = '';
       displayToast(notification, 'Queued');
@@ -79,31 +77,4 @@ document.addEventListener("DOMContentLoaded", function() {
       displayToast(notification, error.message);
     });
   }
-});
-
-window.addEventListener('online', ()=>{
-  console.log('online');
-  const notification = document.querySelector('.mdl-js-snackbar');
-  fetch('https://api.github.com/repos/' + localStorage.getItem('user-name') + '/' + localStorage.getItem('repository') + '/issues', {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'token ' + localStorage.getItem('access-token')
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      title: localStorage.getItem('q-title'),
-      body: localStorage.getItem('q-description')
-    })
-  }).then((response) => {
-    displayToast(notification,  'queue: ' + response.statusText);
-
-    if('Created' === response.statusText){
-      localStorage.removeItem('q-title');
-      localStorage.removeItem('q-description');
-    }
-
-  }).catch((error) => {
-    displayToast(notification, 'queue: ' + error.message);
-  });
 });

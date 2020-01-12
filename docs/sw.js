@@ -8,7 +8,7 @@ if (workbox) {
   },
   {
     "url": "main.js",
-    "revision": "7e7b975f574a85156174ecd1d80bef60"
+    "revision": "0b9c8f91e8775ba44e3576474aa1c4f4"
   },
   {
     "url": "material-icons.css",
@@ -31,6 +31,20 @@ if (workbox) {
     "revision": "6276f3607b19efba8d706d70a232cc43"
   }
 ]);
+
+  const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
+    maxRetentionTime: 24 * 60,
+    callbacks: {
+      // TODO: add notification callback
+    }
+  });
+  workbox.routing.registerRoute(
+      /\.*/,
+    new workbox.strategies.NetworkOnly({
+      plugins: [bgSyncPlugin]
+    }),
+    'POST'
+  );
 } else {
   console.log(`Workbox didn't load`);
 }
