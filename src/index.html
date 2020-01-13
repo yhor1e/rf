@@ -21,7 +21,7 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">rf v0.0.8</span>
+          <span class="mdl-layout-title">rf v0.0.9</span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
             <button id="setting" class="mdl-button mdl-js-button mdl-button--icon">
@@ -88,6 +88,7 @@
         navigator.serviceWorker
                  .register('./sw.js')
                  .then(function() { console.info("Service Worker Registered"); });
+        Notification.requestPermission();
       }
     </script>
   </body>

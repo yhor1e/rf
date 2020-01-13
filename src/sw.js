@@ -6,7 +6,12 @@ if (workbox) {
   const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
     maxRetentionTime: 24 * 60,
     callbacks: {
-      // TODO: add notification callback
+      queueDidReplay: (args)=>{
+        console.log(args);
+        self.registration.showNotification('Background sync done!', {
+          body: '🎉`🎉`🎉`'
+        });
+      }
     }
   });
   workbox.routing.registerRoute(

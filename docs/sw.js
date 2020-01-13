@@ -4,7 +4,7 @@ if (workbox) {
   workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "8bc613936ddb16c05afcfb3b1f180870"
+    "revision": "bbbc5f72330540b963e699f4ba16e41e"
   },
   {
     "url": "main.js",
@@ -35,7 +35,12 @@ if (workbox) {
   const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
     maxRetentionTime: 24 * 60,
     callbacks: {
-      // TODO: add notification callback
+      queueDidReplay: (args)=>{
+        console.log(args);
+        self.registration.showNotification('Background sync done!', {
+          body: '🎉`🎉`🎉`'
+        });
+      }
     }
   });
   workbox.routing.registerRoute(
