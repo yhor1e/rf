@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const dialog = document.querySelector('dialog'),
         showDialogButton = document.querySelector('#setting'),
+        syncButton = document.querySelector('#sync'),
         notification = document.querySelector('.mdl-js-snackbar'),
         title = document.querySelector('#title'),
         description = document.querySelector('#description'),
@@ -16,6 +17,10 @@ document.addEventListener("DOMContentLoaded", function() {
     dialog.showModal();
     document.getElementById('repository').value = localStorage.getItem('repository') || '';
     document.getElementById('access-token').value = localStorage.getItem('access-token') || '';
+  });
+
+  syncButton.addEventListener('click', () => {
+    navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
   });
 
   dialog.querySelector('.close').addEventListener('click', () => {
