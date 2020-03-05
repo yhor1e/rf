@@ -1,16 +1,16 @@
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js"
+  'https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js'
 );
 if (workbox) {
   console.log(`Workbox is loaded`);
   workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "d24495ffc0d3ec527d6eb458a6a6255f"
+    "revision": "4c64de3c26d61a8b0ab2b3595a7b70e8"
   },
   {
     "url": "main.js",
-    "revision": "a3ff236092547a52f374333fa1fcfafd"
+    "revision": "f22b325c191a09a6c1b2dfdbe2434d6a"
   },
   {
     "url": "material-icons.css",
@@ -30,17 +30,17 @@ if (workbox) {
   },
   {
     "url": "toast.js",
-    "revision": "6276f3607b19efba8d706d70a232cc43"
+    "revision": "9c9ae97ac22518f181d31728e70e785d"
   }
 ]);
 
-  const bgSyncPlugin = new workbox.backgroundSync.Plugin("issueQueue", {
+  const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
     maxRetentionTime: 24 * 60,
     callbacks: {
       queueDidReplay: args => {
         console.log(args);
-        self.registration.showNotification("Background sync done!", {
-          body: "🎉`🎉`🎉`"
+        self.registration.showNotification('Background sync done!', {
+          body: '🎉`🎉`🎉`'
         });
       }
     }
@@ -50,13 +50,15 @@ if (workbox) {
     new workbox.strategies.NetworkOnly({
       plugins: [bgSyncPlugin]
     }),
-    "POST"
+    'POST'
   );
 
-  self.addEventListener('sync', ()=>{console.log('sync triggered')})
+  self.addEventListener('sync', () => {
+    console.log('sync triggered');
+  });
   self.addEventListener('message', function(e) {
-    console.log("postMessage received", e);
-    if(e.data === 'getBackgroundSyncQueue'){
+    console.log('postMessage received', e);
+    if (e.data === 'getBackgroundSyncQueue') {
       const syncEvent = new Event('sync');
       syncEvent.tag = 'workbox-background-sync:issueQueue';
       self.dispatchEvent(syncEvent);

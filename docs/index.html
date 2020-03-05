@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>rf</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#448aff">
-    <link rel="manifest" href="./manifest.json">
-    <link rel="stylesheet" href="./material-icons.css">
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#448aff" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./material-icons.css" />
     <link rel="stylesheet" href="./material.blue_grey-blue.min.css" />
     <style>
-      html, body {
+      html,
+      body {
         height: 100%;
       }
     </style>
@@ -27,7 +28,10 @@
             <button id="sync" class="mdl-button mdl-js-button mdl-button--icon">
               <i class="material-icons">cached</i>
             </button>
-            <button id="setting" class="mdl-button mdl-js-button mdl-button--icon">
+            <button
+              id="setting"
+              class="mdl-button mdl-js-button mdl-button--icon"
+            >
               <i class="material-icons">build</i>
             </button>
           </nav>
@@ -36,60 +40,99 @@
       <dialog class="mdl-dialog">
         <h4 class="mdl-dialog__title">Settings</h4>
         <div class="mdl-dialog__content">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="repository">
-            <label class="mdl-textfield__label" for="repository">Repository</label>
+          <div
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+          >
+            <input class="mdl-textfield__input" type="text" id="repository" />
+            <label class="mdl-textfield__label" for="repository"
+              >Repository</label
+            >
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="access-token">
-            <label class="mdl-textfield__label" for="access-token">Access Token</label>
+          <div
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+          >
+            <input
+              class="mdl-textfield__input"
+              type="password"
+              id="access-token"
+            />
+            <label class="mdl-textfield__label" for="access-token"
+              >Access Token</label
+            >
           </div>
 
           <p>
-            Input target GitHub repository and personal access token.
-            These will be stored in localstorage.
+            Input target GitHub repository and personal access token. These will
+            be stored in localstorage.
           </p>
         </div>
         <div class="mdl-dialog__actions">
-          <button id="subscribe" type="button" class="mdl-button">Subscribe</button>
+          <button id="subscribe" type="button" class="mdl-button">
+            Subscribe
+          </button>
           <button type="button" class="mdl-button close">Cancel</button>
         </div>
       </dialog>
 
       <main class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="title">
+        <div
+          class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+        >
+          <input class="mdl-textfield__input" type="text" id="title" />
           <label class="mdl-textfield__label" for="title">Title</label>
         </div>
-        <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <textarea class="mdl-textfield__input" type="text" rows= "10" id="description"></textarea>
-          <label class="mdl-textfield__label" for="description">Description</label>
+        <div
+          class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+        >
+          <textarea
+            class="mdl-textfield__input"
+            type="text"
+            rows="10"
+            id="description"
+          ></textarea>
+          <label class="mdl-textfield__label" for="description"
+            >Description</label
+          >
         </div>
         <div class="mdl-cell mdl-cell--12-col" style="text-align: right;">
-          <a href="https://github.com/yhor1e/rf" class="mdl-color-text--grey-700">About this app</a>
+          <a
+            href="https://github.com/yhor1e/rf"
+            class="mdl-color-text--grey-700"
+            >About this app</a
+          >
         </div>
-
       </main>
 
-      <footer class="mdl-mega-footer__bottom-section" style="position: fixed; bottom: 0;">
+      <footer
+        class="mdl-mega-footer__bottom-section"
+        style="position: fixed; bottom: 0;"
+      >
         <div class="mdl-cell mdl-cell--12-col">
-          <button id="create-issue" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+          <button
+            id="create-issue"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
+          >
             <i class="material-icons">add</i>
           </button>
         </div>
       </footer>
 
-      <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+      <div
+        aria-live="assertive"
+        aria-atomic="true"
+        aria-relevant="text"
+        class="mdl-snackbar mdl-js-snackbar"
+      >
         <div class="mdl-snackbar__text"></div>
         <button type="button" class="mdl-snackbar__action"></button>
       </div>
     </div>
     <script type="module" src="./main.js"></script>
     <script>
-      if('serviceWorker' in navigator) {
-        navigator.serviceWorker
-                 .register('./sw.js')
-                 .then(function() { console.info("Service Worker Registered"); });
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(function() {
+          console.info('Service Worker Registered');
+        });
         Notification.requestPermission();
       }
     </script>
