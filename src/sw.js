@@ -30,11 +30,40 @@ if (workbox) {
   self.addEventListener('message', function(e) {
     console.log('postMessage received', e);
     if (e.data === 'getBackgroundSyncQueue') {
-      const syncEvent = new Event('sync');
-      syncEvent.tag = 'workbox-background-sync:issueQueue';
-      self.dispatchEvent(syncEvent);
+      getBackgroundSyncQueue();
     }
+  });
+  self.addEventListener('activate', event => {
+    event.waitUntil(clients.claim());
+    console.log('Now ready to handle fetches!');
   });
 } else {
   console.log(`Workbox didn't load`);
+}
+
+function getBackgroundSyncQueue() {
+  let open = indexedDB.open('workbox-background-sync');
+
+  open.onsuccess = function() {
+    let db = open.result;
+    if (db.objectStoreNames.length === 0) {
+      return;
+    }
+    let tx = db.transaction('requests');
+    let store = tx.objectStore('requests');
+
+    store.getAll().onsuccess = function(event) {
+      const dataArr = event.target.result;
+      dataArr.forEach(data => {
+        console.log(new Date(data.storableRequest.timestamp));
+        data.storableRequest.requestInit.body.text().then(d => {
+          console.log(d);
+        });
+      });
+    };
+
+    tx.oncomplete = function() {
+      db.close();
+    };
+  };
 }
