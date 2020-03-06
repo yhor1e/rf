@@ -7,13 +7,27 @@ if (workbox) {
 
   const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
     maxRetentionTime: 24 * 60,
-    callbacks: {
-      queueDidReplay: args => {
-        console.log(args);
-        self.registration.showNotification('Background sync done!', {
-          body: '🎉`🎉`🎉`'
-        });
+    onSync: async ({ queue }) => {
+      let entry;
+      while ((entry = await queue.shiftRequest())) {
+        try {
+          let response = await fetch(entry.request.clone());
+          if (!response.ok) {
+            throw new Error('response status is 4xx - 5xx');
+          }
+        } catch (error) {
+          await queue.unshiftRequest(entry);
+          self.registration.showNotification('Background sync failed!', {
+            body: '😩😩😩'
+          });
+          console.log('BackgroundSync Replay failed');
+          throw new Error();
+        }
       }
+      self.registration.showNotification('Background sync done!', {
+        body: '🎉`🎉`🎉`'
+      });
+      console.log('BackgroundSync Replay complete!');
     }
   });
   workbox.routing.registerRoute(
@@ -27,6 +41,7 @@ if (workbox) {
   self.addEventListener('sync', () => {
     console.log('sync triggered');
   });
+
   self.addEventListener('message', function(e) {
     console.log('postMessage received', e);
     if (e.data === 'getBackgroundSyncQueue') {
