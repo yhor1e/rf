@@ -10,7 +10,7 @@ if (workbox) {
   },
   {
     "url": "main.js",
-    "revision": "10713476cc54f955d3b17f1c57468726"
+    "revision": "1330fefcc0e46649a71105613b014268"
   },
   {
     "url": "material-icons.css",

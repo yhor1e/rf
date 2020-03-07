@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.querySelector('#create-issue').disabled = false;
         title.value = '';
         description.value = '';
-        displayToast(notification, 'Queued');
+        reflectBackgroundSyncInfo();
       });
   });
 
