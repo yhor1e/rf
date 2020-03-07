@@ -6,11 +6,11 @@ if (workbox) {
   workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "46245cd2806dd4899e7856ea1487c6cb"
+    "revision": "628314dcae0d19b109c2b5c03cb91ff1"
   },
   {
     "url": "main.js",
-    "revision": "f22b325c191a09a6c1b2dfdbe2434d6a"
+    "revision": "2fb88179f0bf5ea0c07bd2af09a7ed9f"
   },
   {
     "url": "material-icons.css",

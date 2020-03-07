@@ -1,7 +1,8 @@
 import { displayToast } from './toast.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-  const dialog = document.querySelector('dialog'),
+  const settingDialog = document.querySelector('#setting-dialog'),
+    syncDialog = document.querySelector('#sync-dialog'),
     showDialogButton = document.querySelector('#setting'),
     syncButton = document.querySelector('#sync'),
     notification = document.querySelector('.mdl-js-snackbar'),
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     : '';
 
   showDialogButton.addEventListener('click', () => {
-    dialog.showModal();
+    settingDialog.showModal();
     document.getElementById('repository').value =
       localStorage.getItem('repository') || '';
     document.getElementById('access-token').value =
@@ -23,14 +24,23 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   syncButton.addEventListener('click', () => {
-    navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
+  //  navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
+    syncDialog.showModal();
   });
 
-  dialog.querySelector('.close').addEventListener('click', () => {
-    dialog.close();
+  syncDialog.querySelector('#sync').addEventListener('click', () => {
+    syncDialog.close();
   });
 
-  dialog.querySelector('#subscribe').addEventListener('click', () => {
+  syncDialog.querySelector('.close').addEventListener('click', () => {
+    syncDialog.close();
+  });
+
+  settingDialog.querySelector('.close').addEventListener('click', () => {
+    settingDialog.close();
+  });
+
+  settingDialog.querySelector('#subscribe').addEventListener('click', () => {
     localStorage.setItem(
       'access-token',
       document.getElementById('access-token').value
@@ -40,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('repository').value
     );
     getUserName(localStorage.getItem('access-token'));
-    dialog.close();
+    settingDialog.close();
   });
 
   document.querySelector('#create-issue').addEventListener('click', () => {
