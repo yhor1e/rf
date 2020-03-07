@@ -6,11 +6,11 @@ if (workbox) {
   workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "ca549f9c0a297cdb4748d189322f0b5a"
+    "revision": "7ae375c06cfdd272a7028b08490e8a3f"
   },
   {
     "url": "main.js",
-    "revision": "ad2ad9d5afb2bb1bd9307c58d4094176"
+    "revision": "787911874906b3801c5c1fe40f7b97a5"
   },
   {
     "url": "material-icons.css",
@@ -30,7 +30,7 @@ if (workbox) {
   },
   {
     "url": "sync.js",
-    "revision": "222cef47b27e8117b3fc297a6b7c7fd4"
+    "revision": "93b881254a269a01388ef8727bbee099"
   },
   {
     "url": "toast.js",
@@ -78,7 +78,7 @@ if (workbox) {
   self.addEventListener('message', function(e) {
     console.log('postMessage received', e);
     if (e.data === 'getBackgroundSyncQueue') {
-      getBackgroundSyncQueue();
+      //      getBackgroundSyncQueue();
     }
   });
   self.addEventListener('activate', event => {
@@ -87,31 +87,4 @@ if (workbox) {
   });
 } else {
   console.log(`Workbox didn't load`);
-}
-
-function getBackgroundSyncQueue() {
-  let open = indexedDB.open('workbox-background-sync');
-
-  open.onsuccess = function() {
-    let db = open.result;
-    if (db.objectStoreNames.length === 0) {
-      return;
-    }
-    let tx = db.transaction('requests');
-    let store = tx.objectStore('requests');
-
-    store.getAll().onsuccess = function(event) {
-      const dataArr = event.target.result;
-      dataArr.forEach(data => {
-        console.log(new Date(data.storableRequest.timestamp));
-        data.storableRequest.requestInit.body.text().then(d => {
-          console.log(d);
-        });
-      });
-    };
-
-    tx.oncomplete = function() {
-      db.close();
-    };
-  };
 }
