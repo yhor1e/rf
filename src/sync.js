@@ -3,14 +3,16 @@ export { getBackgroundSyncQueuedReqs };
 const getBackgroundSyncQueuedReqs = async () => {
   const queue = await getBackgroundSyncQueue();
   let requests = [];
-  if (queue !== []){
-    requests = queue.map(request => JSON.parse((new TextDecoder('utf-8')).decode(request.requestData.body)));
+  if (queue !== []) {
+    requests = queue.map(request =>
+      JSON.parse(new TextDecoder('utf-8').decode(request.requestData.body))
+    );
   }
   return requests;
 };
 
 async function getBackgroundSyncQueue() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     let open = indexedDB.open('workbox-background-sync');
 
     open.onsuccess = function() {

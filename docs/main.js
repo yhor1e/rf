@@ -26,11 +26,36 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // Background Sync
-  const syncRequests = await getBackgroundSyncQueuedReqs();
-  syncBadge.setAttribute('data-badge', syncRequests.length);
+  reflectBackgroundSyncInfo();
+  async function reflectBackgroundSyncInfo() {
+    const syncRequests = await getBackgroundSyncQueuedReqs();
+    syncBadge.setAttribute('data-badge', syncRequests.length);
 
+    let syncListHtmlStr = '';
+    syncRequests.forEach(request => {
+      const fragmentEl = document.createElement('div');
+      fragmentEl.innerHTML = `
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                              <span class="mdl-list__item-primary-content">
+                                <span class="title"></span>
+                                <span class="description mdl-list__item-text-body">
+                                </span>
+                              </span>
+                            </li>
+                            `;
+
+      fragmentEl.querySelector('.title').innerText = request.title;
+      fragmentEl.querySelector('.description').innerText = request.body;
+
+      syncListHtmlStr += fragmentEl.innerHTML;
+    });
+
+    console.log(syncListHtmlStr);
+
+    syncDialog.querySelector('#sync-list').innerHTML = syncListHtmlStr;
+  }
   syncButton.addEventListener('click', () => {
-  //  navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
+    //  navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
     syncDialog.showModal();
   });
 
