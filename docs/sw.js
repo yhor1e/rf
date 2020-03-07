@@ -76,12 +76,6 @@ if (workbox) {
     console.log('sync triggered');
   });
 
-  self.addEventListener('message', function(e) {
-    console.log('postMessage received', e);
-    if (e.data === 'getBackgroundSyncQueue') {
-      //      getBackgroundSyncQueue();
-    }
-  });
   self.addEventListener('activate', event => {
     event.waitUntil(clients.claim());
     console.log('Now ready to handle fetches!');
