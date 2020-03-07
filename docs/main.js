@@ -1,7 +1,7 @@
 import { displayToast } from './toast.js';
-import { getBackgroundSyncStatus } from './sync.js';
+import { getBackgroundSyncQueuedReqs } from './sync.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   const settingDialog = document.querySelector('#setting-dialog'),
     syncDialog = document.querySelector('#sync-dialog'),
     showDialogButton = document.querySelector('#setting'),
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Background Sync
-  syncBadge.setAttribute('data-badge', getBackgroundSyncStatus().length);
-  console.log(getBackgroundSyncStatus().length);
+  const syncRequests = await getBackgroundSyncQueuedReqs();
+  syncBadge.setAttribute('data-badge', syncRequests.length);
 
   syncButton.addEventListener('click', () => {
   //  navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
