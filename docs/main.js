@@ -1,4 +1,5 @@
 import { displayToast } from './toast.js';
+import { getBackgroundSyncStatus } from './sync.js';
 
 document.addEventListener('DOMContentLoaded', function() {
   const settingDialog = document.querySelector('#setting-dialog'),
@@ -8,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     notification = document.querySelector('.mdl-js-snackbar'),
     title = document.querySelector('#title'),
     description = document.querySelector('#description'),
+    syncBadge = document.querySelector('#sync-badge'),
     urlParams = new URLSearchParams(window.location.search);
 
   title.value = urlParams.has('title') ? urlParams.get('title') : '';
@@ -22,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('access-token').value =
       localStorage.getItem('access-token') || '';
   });
+
+  // Background Sync
+  syncBadge.setAttribute('data-badge', getBackgroundSyncStatus().length);
+  console.log(getBackgroundSyncStatus().length);
 
   syncButton.addEventListener('click', () => {
   //  navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');

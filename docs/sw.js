@@ -6,11 +6,11 @@ if (workbox) {
   workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "628314dcae0d19b109c2b5c03cb91ff1"
+    "revision": "c70a51602e415562b706e37120ecccc2"
   },
   {
     "url": "main.js",
-    "revision": "2fb88179f0bf5ea0c07bd2af09a7ed9f"
+    "revision": "3671d11e1b5aad93bf191029be8ea7a9"
   },
   {
     "url": "material-icons.css",
@@ -27,6 +27,10 @@ if (workbox) {
   {
     "url": "MaterialIcons-Regular.woff2",
     "revision": "570eb83859dc23dd0eec423a49e147fe"
+  },
+  {
+    "url": "sync.js",
+    "revision": "17aec62fa53d3cbaf0669092d608a355"
   },
   {
     "url": "toast.js",
