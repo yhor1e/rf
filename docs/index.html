@@ -15,10 +15,21 @@
       body {
         height: 100%;
       }
-      @media screen and (max-width: 1024px){
+      @media screen and (max-width: 1024px) {
         .mdl-layout__header-row {
           padding: 0 16px 0 16px;
         }
+      }
+      .mdl-button .mdl-badge[data-badge]:after {
+        top: -3px;
+        right: -3px;
+      }
+      .mdl-badge[data-badge]:after {
+        width: 15px;
+        height: 15px;
+      }
+      .mdl-button--icon {
+        border-radius: 0;
       }
     </style>
     <script defer src="./material.min.js"></script>
@@ -30,8 +41,16 @@
           <span class="mdl-layout-title">rf v0.0.9</span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
-            <button id="sync" class="mdl-navigation__link mdl-button mdl-js-button mdl-button--icon">
-              <i class="material-icons">cached</i>
+            <button
+              id="sync"
+              class="mdl-navigation__link mdl-button mdl-js-button mdl-button--icon"
+            >
+              <div
+                class="material-icons mdl-badge mdl-badge--overlap"
+                data-badge="1"
+              >
+                cached
+              </div>
             </button>
             <button
               id="setting"
