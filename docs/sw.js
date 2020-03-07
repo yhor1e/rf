@@ -10,7 +10,7 @@ if (workbox) {
   },
   {
     "url": "main.js",
-    "revision": "787911874906b3801c5c1fe40f7b97a5"
+    "revision": "10713476cc54f955d3b17f1c57468726"
   },
   {
     "url": "material-icons.css",
@@ -60,6 +60,7 @@ if (workbox) {
       self.registration.showNotification('Background sync done!', {
         body: '🎉`🎉`🎉`'
       });
+      self.clients.matchAll().then(all => all.map(client => client.postMessage('reflectBackgroundSyncInfo')));
       console.log('BackgroundSync Replay complete!');
     }
   });

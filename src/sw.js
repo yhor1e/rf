@@ -27,6 +27,7 @@ if (workbox) {
       self.registration.showNotification('Background sync done!', {
         body: '🎉`🎉`🎉`'
       });
+      self.clients.matchAll().then(all => all.map(client => client.postMessage('reflectBackgroundSyncInfo')));
       console.log('BackgroundSync Replay complete!');
     }
   });

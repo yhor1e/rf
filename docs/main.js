@@ -27,6 +27,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   // Background Sync
   reflectBackgroundSyncInfo();
+
+  navigator.serviceWorker.addEventListener('message', (e)=>{
+    console.log('postmessage recieved');
+    if (e.data === 'reflectBackgroundSyncInfo') {
+      reflectBackgroundSyncInfo();
+    }
+  });
+
+
   async function reflectBackgroundSyncInfo() {
     const syncRequests = await getBackgroundSyncQueuedReqs();
     syncBadge.setAttribute('data-badge', syncRequests.length);
