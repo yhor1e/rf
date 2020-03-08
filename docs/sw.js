@@ -5,12 +5,48 @@ if (workbox) {
   console.log(`Workbox is loaded`);
   workbox.precaching.precacheAndRoute([
   {
+    "url": "images/icons/icon-128x128.png",
+    "revision": "5431b8516772d2fad5d4af3950bce80b"
+  },
+  {
+    "url": "images/icons/icon-144x144.png",
+    "revision": "3736e98d53a194b9e824d487789ec917"
+  },
+  {
+    "url": "images/icons/icon-152x152.png",
+    "revision": "204a25013f60f59c251cab6cf4e194f8"
+  },
+  {
+    "url": "images/icons/icon-192x192.png",
+    "revision": "b93ac6e5faf46f5a9aeb15348a6a0339"
+  },
+  {
+    "url": "images/icons/icon-384x384.png",
+    "revision": "973641b5bc4ee249938c9eb06087ac9b"
+  },
+  {
+    "url": "images/icons/icon-512x512.png",
+    "revision": "cd6981581f4e75af0856fa26c9e9bf3b"
+  },
+  {
+    "url": "images/icons/icon-72x72.png",
+    "revision": "bddc3703a345f303e364826854d3f663"
+  },
+  {
+    "url": "images/icons/icon-96x96.png",
+    "revision": "4e1dba3319ce6ab3489afe4d92438e67"
+  },
+  {
     "url": "index.html",
-    "revision": "7ae375c06cfdd272a7028b08490e8a3f"
+    "revision": "732422c88e51f9ddf6be9c27de93c732"
   },
   {
     "url": "main.js",
     "revision": "dadae059f7666353c9c98bc0892bb843"
+  },
+  {
+    "url": "manifest.webmanifest",
+    "revision": "aaa52a70214d4ef88e59cd43b1edd885"
   },
   {
     "url": "material-icons.css",
