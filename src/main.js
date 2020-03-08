@@ -28,13 +28,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Background Sync
   reflectBackgroundSyncInfo();
 
-  navigator.serviceWorker.addEventListener('message', (e)=>{
+  navigator.serviceWorker.addEventListener('message', e => {
     console.log('postmessage recieved');
     if (e.data === 'reflectBackgroundSyncInfo') {
       reflectBackgroundSyncInfo();
     }
   });
-
 
   async function reflectBackgroundSyncInfo() {
     const syncRequests = await getBackgroundSyncQueuedReqs();
@@ -69,7 +68,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   syncDialog.querySelector('#sync').addEventListener('click', () => {
-    syncDialog.close();
+    //syncDialog.close();
+    if (navigator.serviceWorker.controller == null) return;
+    navigator.serviceWorker.controller.postMessage('onSync');
   });
 
   syncDialog.querySelector('.close').addEventListener('click', () => {

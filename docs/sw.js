@@ -10,7 +10,7 @@ if (workbox) {
   },
   {
     "url": "main.js",
-    "revision": "1330fefcc0e46649a71105613b014268"
+    "revision": "dadae059f7666353c9c98bc0892bb843"
   },
   {
     "url": "material-icons.css",
@@ -54,13 +54,18 @@ if (workbox) {
             body: '😩😩😩'
           });
           console.log('BackgroundSync Replay failed');
-          throw new Error();
+          //throw new Error();
+          throw new Error('queue-replay-failed');
         }
       }
       self.registration.showNotification('Background sync done!', {
         body: '🎉`🎉`🎉`'
       });
-      self.clients.matchAll().then(all => all.map(client => client.postMessage('reflectBackgroundSyncInfo')));
+      self.clients
+        .matchAll()
+        .then(all =>
+          all.map(client => client.postMessage('reflectBackgroundSyncInfo'))
+        );
       console.log('BackgroundSync Replay complete!');
     }
   });
@@ -74,6 +79,16 @@ if (workbox) {
 
   self.addEventListener('sync', () => {
     console.log('sync triggered');
+  });
+
+  self.addEventListener('message', e => {
+    console.log('massage recieved (sw)');
+    if (e.data === 'onSync') {
+      // e = (new Event('sync'));
+      // e.tag = 'workbox-background-sync:requests';
+      // self.dispatchEvent(e)
+      bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
+    }
   });
 
   self.addEventListener('activate', event => {
