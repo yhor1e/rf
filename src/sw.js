@@ -48,15 +48,15 @@ if (workbox) {
     console.log('sync triggered');
   });
 
-  self.addEventListener('message', e => {
-    console.log('massage recieved (sw)');
-    if (e.data === 'onSync') {
-      // e = (new Event('sync'));
-      // e.tag = 'workbox-background-sync:requests';
-      // self.dispatchEvent(e)
-      bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
-    }
-  });
+  // self.addEventListener('message', e => {
+  //   console.log('massage recieved (sw)');
+  //   if (e.data === 'onSync') {
+  //     // e = (new Event('sync'));
+  //     // e.tag = 'workbox-background-sync:requests';
+  //     // self.dispatchEvent(e)
+  //     bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
+  //   }
+  // });
 
   self.addEventListener('activate', event => {
     event.waitUntil(clients.claim());

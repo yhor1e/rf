@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     syncDialog.showModal();
   });
 
-  syncDialog.querySelector('#sync').addEventListener('click', () => {
-    //syncDialog.close();
-    if (navigator.serviceWorker.controller == null) return;
-    navigator.serviceWorker.controller.postMessage('onSync');
-  });
+  // syncDialog.querySelector('#sync').addEventListener('click', () => {
+  //   //syncDialog.close();
+  //   if (navigator.serviceWorker.controller == null) return;
+  //   navigator.serviceWorker.controller.postMessage('onSync');
+  // });
 
   syncDialog.querySelector('.close').addEventListener('click', () => {
     syncDialog.close();

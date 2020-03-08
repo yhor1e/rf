@@ -38,11 +38,11 @@ if (workbox) {
   },
   {
     "url": "index.html",
-    "revision": "090c83c406640abc630634d5d5cfc28f"
+    "revision": "67eec2079f4d866218d21974f5a46eac"
   },
   {
     "url": "main.js",
-    "revision": "4a02bc80c7db7266a3480ec4d1b3a334"
+    "revision": "a9afbde44e4a3fb3774037c658dedbdc"
   },
   {
     "url": "manifest.webmanifest",
@@ -117,15 +117,15 @@ if (workbox) {
     console.log('sync triggered');
   });
 
-  self.addEventListener('message', e => {
-    console.log('massage recieved (sw)');
-    if (e.data === 'onSync') {
-      // e = (new Event('sync'));
-      // e.tag = 'workbox-background-sync:requests';
-      // self.dispatchEvent(e)
-      bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
-    }
-  });
+  // self.addEventListener('message', e => {
+  //   console.log('massage recieved (sw)');
+  //   if (e.data === 'onSync') {
+  //     // e = (new Event('sync'));
+  //     // e.tag = 'workbox-background-sync:requests';
+  //     // self.dispatchEvent(e)
+  //     bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
+  //   }
+  // });
 
   self.addEventListener('activate', event => {
     event.waitUntil(clients.claim());
