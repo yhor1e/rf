@@ -38,15 +38,15 @@ if (workbox) {
   },
   {
     "url": "index.html",
-    "revision": "5790e4a4ab8309cedbe4e669e739d0dc"
+    "revision": "090c83c406640abc630634d5d5cfc28f"
   },
   {
     "url": "main.js",
-    "revision": "dadae059f7666353c9c98bc0892bb843"
+    "revision": "4a02bc80c7db7266a3480ec4d1b3a334"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "aaa52a70214d4ef88e59cd43b1edd885"
+    "revision": "88af2137d903fe8a10f7d8c7f4b70449"
   },
   {
     "url": "material-icons.css",

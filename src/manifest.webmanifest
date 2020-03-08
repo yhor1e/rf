@@ -5,8 +5,16 @@
   "background_color": "#607d8b",
   "display": "standalone",
   "orientation": "portrait",
-  "Scope": "/yhor1e.github.io/",
+  "scope": "/yhor1e.github.io/",
   "start_url": "./index.html",
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text"
+    }
+  },
   "icons": [
     {
       "src": "./images/icons/icon-72x72.png",

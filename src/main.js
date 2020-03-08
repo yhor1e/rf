@@ -10,11 +10,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     title = document.querySelector('#title'),
     description = document.querySelector('#description'),
     syncBadge = document.querySelector('#sync-badge'),
-    urlParams = new URLSearchParams(window.location.search);
+    parsedUrl = new URL(window.location);
+//    urlParams = new URLSearchParams(window.location.search);
 
-  title.value = urlParams.has('title') ? urlParams.get('title') : '';
-  description.value = urlParams.has('description')
-    ? urlParams.get('description')
+  title.value = parsedUrl.searchParams.has('title') ? parsedUrl.searchParams.get('title') : '';
+  description.value = parsedUrl.searchParams.has('text')
+    ? parsedUrl.searchParams.get('text')
     : '';
 
   showDialogButton.addEventListener('click', () => {
