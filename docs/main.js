@@ -11,9 +11,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     description = document.querySelector('#description'),
     syncBadge = document.querySelector('#sync-badge'),
     parsedUrl = new URL(window.location);
-//    urlParams = new URLSearchParams(window.location.search);
+  //    urlParams = new URLSearchParams(window.location.search);
 
-  title.value = parsedUrl.searchParams.has('title') ? parsedUrl.searchParams.get('title') : '';
+  title.value = parsedUrl.searchParams.has('title')
+    ? parsedUrl.searchParams.get('title')
+    : '';
   description.value = parsedUrl.searchParams.has('text')
     ? parsedUrl.searchParams.get('text')
     : '';
@@ -64,12 +66,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     syncDialog.querySelector('#sync-list').innerHTML = syncListHtmlStr;
   }
   syncButton.addEventListener('click', () => {
-    //  navigator.serviceWorker.controller.postMessage('getBackgroundSyncQueue');
     syncDialog.showModal();
   });
 
   // syncDialog.querySelector('#sync').addEventListener('click', () => {
-  //   //syncDialog.close();
   //   if (navigator.serviceWorker.controller == null) return;
   //   navigator.serviceWorker.controller.postMessage('onSync');
   // });
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     )
       .then(response => {
         document.querySelector('#create-issue').disabled = false;
-        displayToast(notification, response.statusText);
+        displayToast(notification, response.status + ' ' + response.statusText);
 
         if ('Created' === response.statusText) {
           title.value = '';

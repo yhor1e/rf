@@ -13,15 +13,16 @@ if (workbox) {
         try {
           let response = await fetch(entry.request.clone());
           if (!response.ok) {
-            throw new Error('response status is 4xx - 5xx');
+            self.registration.showNotification('Background sync failed!', {
+              body: '😩😩😩 ' + response.status + ' ' + response.statusText
+            });
+            if (response.status !== 401 && response.status !== 422) {
+              throw new Error('response status is 4xx - 5xx');
+            }
           }
         } catch (error) {
           await queue.unshiftRequest(entry);
-          self.registration.showNotification('Background sync failed!', {
-            body: '😩😩😩'
-          });
           console.log('BackgroundSync Replay failed');
-          //throw new Error();
           throw new Error('queue-replay-failed');
         }
       }
@@ -48,15 +49,18 @@ if (workbox) {
     console.log('sync triggered');
   });
 
-  // self.addEventListener('message', e => {
-  //   console.log('massage recieved (sw)');
-  //   if (e.data === 'onSync') {
-  //     // e = (new Event('sync'));
-  //     // e.tag = 'workbox-background-sync:requests';
-  //     // self.dispatchEvent(e)
-  //     bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
-  //   }
-  // });
+  self.addEventListener('message', e => {
+    console.log('massage recieved (sw)');
+
+    // if (e.data === 'onSync') {
+    //   e = new SyncEvent('sync', {
+    //     tag: 'workbox-background-sync:issueQueue',
+    //     lastChance: true
+    //   });
+    //   self.dispatchEvent(e);
+    //   //bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
+    // }
+  });
 
   self.addEventListener('activate', event => {
     event.waitUntil(clients.claim());

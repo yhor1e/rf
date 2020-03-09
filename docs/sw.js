@@ -38,11 +38,11 @@ if (workbox) {
   },
   {
     "url": "index.html",
-    "revision": "67eec2079f4d866218d21974f5a46eac"
+    "revision": "e98f70d39a6d091d67e6ae8bf33da797"
   },
   {
     "url": "main.js",
-    "revision": "a9afbde44e4a3fb3774037c658dedbdc"
+    "revision": "035132510595bba36f22f6722172f529"
   },
   {
     "url": "manifest.webmanifest",
@@ -82,15 +82,16 @@ if (workbox) {
         try {
           let response = await fetch(entry.request.clone());
           if (!response.ok) {
-            throw new Error('response status is 4xx - 5xx');
+            self.registration.showNotification('Background sync failed!', {
+              body: '😩😩😩 ' + response.status + ' ' + response.statusText
+            });
+            if (response.status !== 401 && response.status !== 422) {
+              throw new Error('response status is 4xx - 5xx');
+            }
           }
         } catch (error) {
           await queue.unshiftRequest(entry);
-          self.registration.showNotification('Background sync failed!', {
-            body: '😩😩😩'
-          });
           console.log('BackgroundSync Replay failed');
-          //throw new Error();
           throw new Error('queue-replay-failed');
         }
       }
@@ -117,15 +118,18 @@ if (workbox) {
     console.log('sync triggered');
   });
 
-  // self.addEventListener('message', e => {
-  //   console.log('massage recieved (sw)');
-  //   if (e.data === 'onSync') {
-  //     // e = (new Event('sync'));
-  //     // e.tag = 'workbox-background-sync:requests';
-  //     // self.dispatchEvent(e)
-  //     bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
-  //   }
-  // });
+  self.addEventListener('message', e => {
+    console.log('massage recieved (sw)');
+
+    // if (e.data === 'onSync') {
+    //   e = new SyncEvent('sync', {
+    //     tag: 'workbox-background-sync:issueQueue',
+    //     lastChance: true
+    //   });
+    //   self.dispatchEvent(e);
+    //   //bgSyncPlugin._queue._onSync({ queue: bgSyncPlugin._queue });
+    // }
+  });
 
   self.addEventListener('activate', event => {
     event.waitUntil(clients.claim());
