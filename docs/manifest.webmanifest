@@ -5,7 +5,7 @@
   "background_color": "#607d8b",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/yhor1e.github.io/",
+  "scope": "./",
   "start_url": "./index.html",
   "share_target": {
     "action": "./index.html",
