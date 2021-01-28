@@ -46,7 +46,7 @@ if (workbox) {
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "88af2137d903fe8a10f7d8c7f4b70449"
+    "revision": "3dedafa1d8e0c0c02700eca2f0dfa0aa"
   },
   {
     "url": "material-icons.css",
