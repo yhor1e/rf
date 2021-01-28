@@ -38,11 +38,11 @@ if (workbox) {
   },
   {
     "url": "index.html",
-    "revision": "e98f70d39a6d091d67e6ae8bf33da797"
+    "revision": "4fdf79b21a3e3cd3e5efedca89f83681"
   },
   {
     "url": "main.js",
-    "revision": "035132510595bba36f22f6722172f529"
+    "revision": "103f419a9ba868fc8cfc03d381a13fb9"
   },
   {
     "url": "manifest.webmanifest",
