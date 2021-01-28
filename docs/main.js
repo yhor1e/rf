@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.querySelector('#create-issue').disabled = false;
         displayToast(notification, response.status + ' ' + response.statusText);
 
-        if ('Created' === response.statusText) {
+        if (201 === response.status) {
           title.value = '';
           description.value = '';
         }
