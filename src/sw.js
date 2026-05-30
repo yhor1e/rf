@@ -1,9 +1,9 @@
 importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
+  'https://storage.googleapis.com/workbox-cdn/releases/7.4.1/workbox-sw.js'
 );
 if (workbox) {
   console.log(`Workbox is loaded`);
-  workbox.precaching.precacheAndRoute([]);
+  workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
 
   const bgSyncPlugin = new workbox.backgroundSync.Plugin('issueQueue', {
     maxRetentionTime: 24 * 60,
